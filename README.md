@@ -13,7 +13,7 @@ rvm install 1.9.2 && rvm use 1.9.2
 Install Jekyll
 
 ```
-gem install Jekyll
+gem install jekyll
 ```
 
 Run the Jekyll server
