@@ -1,0 +1,26 @@
+<div class="highlight"><pre><span class="c1"># Public: Makes a GET request to Mega API</span>
+<span class="c1">#</span>
+<span class="c1"># shop   - The Shop instance</span>
+<span class="c1"># url    - The String which is the URL to query for</span>
+<span class="c1"># params - The Hash of attributes to pass in to the query</span>
+<span class="c1">#</span>
+<span class="c1"># Examples</span>
+<span class="c1">#</span>
+<span class="c1">#   MegaApps::Interface.get(shop, &#39;/foo&#39;, {bar: &#39;bar&#39;})</span>
+<span class="c1">#   # =&gt; {...}</span>
+<span class="c1">#</span>
+<span class="c1"># Returns the Hash</span>
+<span class="c1">#</span>
+<span class="c1"># Signature</span>
+<span class="c1">#</span>
+<span class="c1">#   &lt;mtd&gt;(args)</span>
+<span class="c1">#</span>
+<span class="c1"># mtd - Either of the get, post or put HTTP methods</span>
+<span class="sx">%w(get put post)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">mtd</span><span class="o">|</span>
+  <span class="n">define_method</span> <span class="n">mtd</span> <span class="k">do</span> <span class="o">|</span><span class="n">shop</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}</span><span class="o">|</span>
+    <span class="n">pre_setup</span>
+    <span class="no">Mega</span><span class="o">::</span><span class="no">Request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mtd</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">access_params</span><span class="p">(</span><span class="n">shop</span><span class="p">,</span> <span class="n">params</span><span class="p">))</span><span class="o">.</span><span class="n">to_hash</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+</div>
