@@ -53,3 +53,10 @@ jekyll --server
 ```
 
 View site at http://localhost:4000
+
+Push to Heroku - http://peterschaadt.com
+
+```
+git push heroku master
+```
+
