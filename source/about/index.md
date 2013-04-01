@@ -8,7 +8,7 @@ footer: true
 
 ## What's my story?
 
-I'm Peter Schaadt, a 22 year-old Sunnyvale native. After graduating from Bellarmine College Prep in San Jose, I left Silicon Valley for the East Coast to pursue a degree in Computer Science at the University of Virginia in Charlottesville. At school I've been involved in club water polo, the Business Ethics Society, and taking names at the ping pong table in the rec room. I've had the joy of working at QuoteWizard in Seattle as a web development/QA intern as well as at Leftronic (YC S10) where I worked on Django development, graphical Javascript widgets and maintained client APIs.
+I'm Peter Schaadt, a 22 year-old Sunnyvale native. After graduating from Bellarmine College Prep in San Jose, I left Silicon Valley for the East Coast to pursue a degree in Computer Science at the University of Virginia in Charlottesville. At school I've been involved with club water polo, the Business Ethics Society, and taking names at the ping pong table in the rec room. I've had the joy of working at QuoteWizard in Seattle as a web development/QA intern as well as at Leftronic (YC S10) where I worked on Django development, graphical Javascript widgets and maintained client APIs.
 
 ## What do I do?
 
@@ -18,7 +18,7 @@ My technical interests include Python, Django, JavaScript, Backbone.js, Ruby, Ra
 
 ## What do I use?
 
-I'm currently running OS X Mountain Lion on my MacBook Air but I run a Linux Ubuntu 12.04 VM with Virtualbox when I can't stand all the skeumorphism. Check out my detailed post on [my setup](/posts/what-i-use).
+I'm currently running OS X Mountain Lion on my MacBook Air but I run a Linux Ubuntu 12.04 VM with Virtualbox when I can't stand all the skeumorphism. Check out my detailed post on [my setup](/blog/2012/03/26/my-setup/).
 
 ## Where can you find me?
 

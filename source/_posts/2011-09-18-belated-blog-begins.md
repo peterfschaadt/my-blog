@@ -13,4 +13,4 @@ Before Web 3.0 takes the Silicon Valley by storm I'd like to fulfill my Web 2.0 
 
 This blog was built using Octopress, a Jekyll framework, and will be hosted on Heroku. I've found it an annoyance to maintain Wordpress and a database and I've decided the portable solution that Jekyll provides is best for my purposes. Additionally, you can view this blog's source code repository on [Github](https://github.com/peterfschaadt/my-blog).
 
-Be sure to check back frequently for updates (subscription feature hopefully coming soon). Feel free to [contact me](mailto:peter.schaadt@gmail.com) if you have any questions or suggestions!
+Be sure to check back frequently for updates (subscription feature hopefully coming soon). Feel free to [contact me](/contact) if you have any questions or suggestions!
