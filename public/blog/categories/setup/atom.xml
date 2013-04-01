@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Setup | Peter Schaadt]]></title>
+  <link href="http://peterschaadt.com/blog/categories/setup/atom.xml" rel="self"/>
+  <link href="http://peterschaadt.com/"/>
+  <updated>2013-03-31T23:40:02-07:00</updated>
+  <id>http://peterschaadt.com/</id>
+  <author>
+    <name><![CDATA[Peter Schaadt]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My Setup]]></title>
+    <link href="http://peterschaadt.com/blog/2012/03/26/my-setup/"/>
+    <updated>2012-03-26T16:43:00-07:00</updated>
+    <id>http://peterschaadt.com/blog/2012/03/26/my-setup</id>
+    <content type="html"><![CDATA[<h2>What do I use?</h2>
+
+<p>This post is inspired by <a href="http://usesthis.com">UsesThis</a>, a site that highlights individuals and their development setups. I have a lot of people that ask me what I use in my development workflow so I'd like to put it out there. I'll try to update this as frequently as I can when things change.</p>
+
+<h2>Operating System: <a href="http://www.apple.com/osx/">OS X Mountain Lion 10.8.2</a></h2>
+
+<p>I was a long-time Windows fan but once I started doing serious development work Cygwin just wasn't cutting it anymore. I had some problems with OS X Lion, notably with compiling MySQL and with support for full-screen apps, but the latest release of Mountain Lion seems to work much better for me.</p>
+
+<h2>Browser: <a href="https://www.google.com/intl/en/chrome/browser/beta.html">Google Chrome Beta</a></h2>
+
+<p>Google Chrome's silent updates and syncing features (including tabs!) keep my browser up to date between my laptops and desktops. I've always loved Firefox but I stopped using it as my primary browser once Google Chrome expanded its collection of extensions. Firefox has fixed some of the memory bloat and I still use it frequently for debugging with Firebug, but I've become attached to the speed and usability of Google Chrome. The <a href="https://www.google.com/intl/en/chrome/browser/canary.html">Canary release</a> provides even more cutting-edge features and can be used alongside your standard Chrome install.</p>
+
+<h2>Text Editor: <a href="http://www.sublimetext.com/2">Sublime Text 2</a></h2>
+
+<p>When I used Windows I was a fan of Notepad++ and I looked for something similar when I switched to Mac OS X. I do not find the features of Textmate or BBEdit to be worth the cost and ever since I've discovered Sublime Text Editor I haven't looked back. I haven't checked it out yet but a <a href="http://www.sublimetext.com/blog/articles/sublime-text-3-beta">Sublime Text 3 Beta</a> was recently released.</p>
+
+<h2>IDE: <a href="http://www.jetbrains.com/pycharm/">Jetbrains PyCharm</a></h2>
+
+<p>PyCharm isn't cheap but anyone who's familiar with Jetbrains IntelliJ (for Java) knows that Jetbrains knows how to make productive, yet attractive, IDEs. PyCharm also offers great Django and Flask support. I've used Eclipse for university projects but it's always been too cumbersome and slow for me.</p>
+
+<h2>Terminal: <a href="http://www.iterm2.com/#/section/home">iTerm2</a>, <a href="http://zsh.sourceforge.net/">ZSH</a>, and <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a></h2>
+
+<p>Coming from PowerShell and Cygwin, the default terminal app was a blessing. Then I found iTerm2 which offers split panes, search, autocomplete, instant replay (mostly just for fun), and custom profiles. Before long I had switched from Bash to ZSH (Z Shell) (just a <code>chsh -s /bin/zsh</code> away!) and oh-my-zsh. There is much better support for extended globbing, path expansion, command line history, and oh-my-zsh adds support for configuring your prompt and choosing a color theme to suit your preferences.</p>
+
+<h2>Mail: <a href="http://www.sparrowmailapp.com/">Sparrow</a></h2>
+
+<p>This excellent and intuitive mail application offers the best desktop Gmail support for Macs. I was dismayed to find out that the team had been hired by Google and that development would cease. That said, the app is still very usable.</p>
+
+<h2>Office Suite: <a href="http://www.libreoffice.org/">LibreOffice</a></h2>
+
+<p>While the Microsoft Office Suite reigns over almost every Windows install, their offering for Macs is an entirely different beast. I uninstalled OpenOffice after a few days of using it and settled on LibreOffice. Their productivity apps are fast and I prefer their traditional look.</p>
+
+<h2>Mockups: <a href="http://www.balsamiq.com/">Balsamiq</a></h2>
+
+<p>For those quick, interactive, but not high-fidelity mockups, I haven't found a better tool than Balsamiq. In addition to producing great software, I've reached out to the Balsamiq Team before about support issues and received prompt feedback with a solution. Their Mockups To Go page offers downloads for additional UI elements like Twitter's <a href="https://mockupstogo.mybalsamiq.com/projects/web/Bootstrap">Bootstrap</a> and Apple's <a href="https://mockupstogo.mybalsamiq.com/projects/ios/iPad+Controls">iPad</a> which have been very helpful.</p>
+
+<h2>VM: <a href="https://www.virtualbox.org/">VirtualBox</a></h2>
+
+<p>Sadly, when I enabled Full Disk Encryption on my MacBook Air I was no longer able to dual-boot with Linux. Since then I've run my Ubuntu OS (usually 12.04) using VirtualBox. It's a really useful program and it doesn't seem to slow down my computer as much as other virtual machine tools.</p>
+
+<h2>Media: <a href="http://videolan.org">VLC</a>, <a href="http://xbmc.org/">XBMC</a> 12.0 RC2 Frodo</h2>
+
+<p>For those odd file types, VLC handles everything with ease. I've even had a lot of luck with it playing corrupted files. I prefer to not have iTunes managing my media library so I just open my Music directory with VLC and it works great.
+For managing movies and TV shows, you just can't beat XBMC. It fetches background art, HD trailers, and IMDB ratings for every movie in your collection. This is all with the default configuration. There's also an amazing remote control app for your Android device called <a href="https://play.google.com/store/apps/details?id=org.leetzone.android.yatsewidgetfree&amp;hl=en">Yatse</a>.</p>
+
+<p>Last updated: 2/7/2013.</p>
+]]></content>
+  </entry>
+  
+</feed>

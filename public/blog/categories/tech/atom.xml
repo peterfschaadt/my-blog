@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tech | Peter Schaadt]]></title>
+  <link href="http://peterschaadt.com/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://peterschaadt.com/"/>
+  <updated>2013-03-31T23:40:02-07:00</updated>
+  <id>http://peterschaadt.com/</id>
+  <author>
+    <name><![CDATA[Peter Schaadt]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Silicon Valley Code Camp]]></title>
+    <link href="http://peterschaadt.com/blog/2011/10/20/silicon-valley-code-camp/"/>
+    <updated>2011-10-20T00:00:00-07:00</updated>
+    <id>http://peterschaadt.com/blog/2011/10/20/silicon-valley-code-camp</id>
+    <content type="html"><![CDATA[<p>This October I was fortunate enough to be able to attend <a href="http://www.siliconvalley-codecamp.com/">Silicon Valley Code Camp</a> at Foothill Community College in sunny Los Altos, California. A two-day event, SVCC consisted of a diverse collection of tech talks and demos. A stronge presence of corporate sponsors such as Google, Box, Adobe, Microsoft, Bitbucket, Twilio, and 10gen ensured an ample supply of coffee, muffins, and catered sandwiches for the 2,247 in attendance. This was the first tech conference I have attended, and while I am the spritely age of 21, I noticed I was one of the youngest people on site.</p>
+
+<h2>Day 1, Saturday</h2>
+
+<p>The morning kicked off with a personal highlight, hearing Douglas Crawford, author of one of my favorite technical books, <em>Javascript: The Good Parts</em>, give his "ECMAScript 5: The New Parts" talk. His presentation sparked a fantastic discussion on the future direction of Javascript and its role in web development as well as its surge in popularity among mobile frameworks.</p>
+
+<p>For my next talk I headed over to an "Introduction to MongoDB," given by Manish Pandit, Director of Engineering at IGN. It's rare that binary JSON, server replication, and humor are combined in a presentation but a great job was done entertaining the crowded auditorium while we learned the basics of MongoDB. We viewed ad-hoc queries being made on production servers (I hope he didn't get in trouble!) and got a great look at being productive with the mongo shell.</p>
+
+<p>After sandwiches provided courtesy of Google, I went to an Android Tablet application programming session which showed off the capabilities of the Android 3.x SDK. We used working code snippets to demonstrate some of the new features and picked through a couple sample applications.</p>
+
+<h2>Day 2, Sunday</h2>
+
+<p>With the passing of Steve Jobs less than a week earlier, many of us gathered in a packed room Sunday to mourn the loss of one of the world's greatest leaders and innovators. Many attendees shared personal anecdotes of their encounters with Steve that lent unique insight into his world.</p>
+
+<p>I followed this with an in-depth session exploring the world that is Vim. Many people in the crowd were split by the question of their favorite code editor and soon a strong, but informed, debate ensued between the entrenched users of Vim and Emacs. This session was just as much about development practices as much as it was about programming culture and I got to pick up many great insights on achieving maximum workflow productivity.</p>
+
+<p>I finished the afternoon with a session on current and upcoming trends in web analytics. This fascinating presentation discussed the rise in event-based tracking as well as the emerging desire for mobile application analytics. Considering <a href="https://www.leftronic.com">Leftronic</a>, the startup I started working for in September, offers a lot of dashboard widgets utilizing APIs for web analytics, I felt like I walked away from this session with a newfound understanding of web analytics and their importance in generating actionable business intelligence data.</p>
+
+<p>In addition to the many interesting topics I was exposed to at the tech talks, I got to demo the latest Windows Phone Mango update, watch an autonomous robot navigate with just Microsoft Kinect sensors, and see fork bombs test the autoscaling capabilities of some cloud-hosted applications.</p>
+]]></content>
+  </entry>
+  
+</feed>

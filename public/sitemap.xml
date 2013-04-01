@@ -1,27 +1,39 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://peterschaadt.com/blog/2012/10/01/lorem-ipsum/</loc>
-        <lastmod>2012-12-13T23:03:48-05:00</lastmod>
+        <loc>http://peterschaadt.com/blog/2011/09/18/belated-blog-begins/</loc>
+        <lastmod>2013-02-07T16:33:13-08:00</lastmod>
     </url>
     <url>
-        <loc>http://peterschaadt.com/blog/2012/10/02/aenean-posuere/</loc>
-        <lastmod>2012-12-13T23:03:48-05:00</lastmod>
+        <loc>http://peterschaadt.com/blog/2011/10/20/silicon-valley-code-camp/</loc>
+        <lastmod>2013-03-31T23:02:13-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion/</loc>
+        <lastmod>2013-03-31T23:25:30-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peterschaadt.com/blog/2012/03/26/my-setup/</loc>
+        <lastmod>2013-03-31T23:02:33-07:00</lastmod>
+    </url>
+    <url>
+        <loc>http://peterschaadt.com/blog/2013/03/04/upgrading-to-django-1.5/</loc>
+        <lastmod>2013-03-31T23:01:14-07:00</lastmod>
     </url>
     <url>
         <loc>http://peterschaadt.com/about/</loc>
-        <lastmod>2012-12-13T23:39:42-05:00</lastmod>
+        <lastmod>2013-03-31T23:23:48-07:00</lastmod>
     </url>
     <url>
         <loc>http://peterschaadt.com/blog/archives/</loc>
-        <lastmod>2012-12-13T23:03:48-05:00</lastmod>
+        <lastmod>2013-03-31T23:25:30-07:00</lastmod>
     </url>
     <url>
         <loc>http://peterschaadt.com/contact/</loc>
-        <lastmod>2012-12-13T23:39:45-05:00</lastmod>
+        <lastmod>2013-03-31T23:18:54-07:00</lastmod>
     </url>
     <url>
         <loc>http://peterschaadt.com/</loc>
-        <lastmod>2012-12-13T23:03:48-05:00</lastmod>
+        <lastmod>2013-03-31T23:25:30-07:00</lastmod>
     </url>
 </urlset>

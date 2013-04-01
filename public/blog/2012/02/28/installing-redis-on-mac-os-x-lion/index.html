@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Installing Redis on Mac OS X Lion - Peter Schaadt</title>
+  <meta name="author" content="Peter Schaadt">
+
+  
+  <meta name="description" content="This post will give you a quick overview of installing the latest stable version of Redis on Mac OS X Lion 10.7.3. Fire up the Terminal app on your &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Peter Schaadt" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28380452-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="/">Peter Schaadt</a></h1>
+  
+    <h2>posts, problems, and pleasantries</h2>
+  
+</hgroup>
+
+</header>
+  <div id="navigation">
+    <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:peterschaadt.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about">About Me</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/contact">Contact</a></li>
+</ul>
+
+</nav>
+  </div>
+  <div id="body"  >
+    <div id="main">
+      <div id="content">
+        <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Installing Redis on Mac OS X Lion</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-28T00:00:00-08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This post will give you a quick overview of installing the latest stable version of <a href="http://redis.io">Redis</a> on Mac OS X Lion 10.7.3.</p>
+
+<p>Fire up the Terminal app on your Mac and fetch the Redis package.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.8.tar.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you don&#8217;t have wget, you can install it with <a href="http://mxcl.github.com/homebrew/">Homebrew</a>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install wget</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now extract the Redis archive, navigate to the folder, and run <code>make</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xzf redis-2.4.8.tar.gz
+</span><span class='line'>cd redis-2.4.8
+</span><span class='line'>sudo make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&#8217;s a good idea to run the included tests to make sure everything went smoothly (<strong>warning</strong>: this caused a lot of System prompts about allowing Redis connections).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make test</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fire up the server on localhost.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>redis-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To use the Redis console, <code>redis-server</code> must already be running (in a separate tab/window).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>redis-cli</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Peter Schaadt</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-28T00:00:00-08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mac-os-x/'>Mac OS X</a>, <a class='category' href='/blog/categories/redis/'>Redis</a>, <a class='category' href='/blog/categories/software/'>Software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion/" data-via="PeterSchaadt" data-counturl="http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/10/20/silicon-valley-code-camp/" title="Previous Post: Silicon Valley Code Camp">&laquo; Silicon Valley Code Camp</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/03/26/my-setup/" title="Next Post: My Setup">My Setup &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/03/04/upgrading-to-django-1.5/">Upgrading to Django 1.5</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/26/my-setup/">My Setup</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/28/installing-redis-on-mac-os-x-lion/">Installing Redis on Mac OS X Lion</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/10/20/silicon-valley-code-camp/">Silicon Valley Code Camp</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/18/belated-blog-begins/">Belated Blog Begins</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+      </div>
+    </div>
+    <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Peter Schaadt / 
+  <a href="https://github.com/peterfschaadt">GitHub</a> / 
+  <a href="https://twitter.com/peterschaadt">Twitter</a> / 
+  <a href="https://www.linkedin.com/profile/view?id=93642736">LinkedIn</a> / 
+  <a href="https://plus.google.com/106197844179274757910">Google+</a> /
+</p>
+
+</footer>
+    
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+  </div>
+</body>
+</html>

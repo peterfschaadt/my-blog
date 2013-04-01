@@ -4,7 +4,7 @@
   <title><![CDATA[Peter Schaadt]]></title>
   <link href="http://peterschaadt.com/atom.xml" rel="self"/>
   <link href="http://peterschaadt.com/"/>
-  <updated>2012-12-13T23:44:26-05:00</updated>
+  <updated>2013-03-31T23:40:02-07:00</updated>
   <id>http://peterschaadt.com/</id>
   <author>
     <name><![CDATA[Peter Schaadt]]></name>
@@ -14,195 +14,212 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Aenean posuere]]></title>
-    <link href="http://peterschaadt.com/blog/2012/10/02/aenean-posuere/"/>
-    <updated>2012-10-02T06:29:00-04:00</updated>
-    <id>http://peterschaadt.com/blog/2012/10/02/aenean-posuere</id>
-    <content type="html"><![CDATA[<h2>Aenean posuere</h2>
+    <title type="html"><![CDATA[Upgrading to Django 1.5]]></title>
+    <link href="http://peterschaadt.com/blog/2013/03/04/upgrading-to-django-1.5/"/>
+    <updated>2013-03-04T00:00:00-08:00</updated>
+    <id>http://peterschaadt.com/blog/2013/03/04/upgrading-to-django-1.5</id>
+    <content type="html"><![CDATA[<p>Recently I upgraded a Django site from 1.4.5 to the new <a href="https://docs.djangoproject.com/en/dev/releases/1.5/">1.5</a> release. I decided to upgrade before my Django app got more complex and I wanted to check out the new <a href="https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user">configurable user model</a>. I&#8217;ll cover some problems I had when upgrading and show replacements for some deprecated methods.</p>
 
-<p>odio eget imperdiet ullamcorper, nulla libero auctor dui, at adipiscing tortor neque nec lacus. Donec <a href="http://foo.com">ac mi luctus</a> nisi vestibulum scelerisque. Integer congue metus in nisi venenatis sit amet sagittis tortor sodales. Phasellus lobortis sollicitudin porttitor. Integer vel enim eu nunc laoreet pharetra eget nec nibh. Nam <a href="http://github.com">orci quam</a>, facilisis a accumsan vel, ultricies at felis. Nullam erat ipsum, tempor a viverra id, pulvinar non odio. Suspendisse eu turpis ligula, quis mattis dolor. Ut pellentesque mattis ipsum in ornare. Nullam non metus lacus. Vivamus sed euismod mi. Sed sed tellus dui, molestie dignissim turpis.</p>
+<p>I did a quick <code>pip install django==1.5</code> and hoped for the best. Unfortunately my heart sank when I ran <code>python manage.py runserver</code> after upgrading and was greeted with an error message (DEBUG set to true in settings) about some import statements. Nothing in software comes easy.</p>
 
-<!-- more -->
+<p>Like a lot of sites on the web, my Django app has a <a href="http://www.robotstxt.org/">robots.txt</a> and a <a href="http://humanstxt.org">humans.txt</a> file. With Django 1.4.5 I had been serving these text files with the <code>direct_to_template</code> method, with a mimetype of &#8220;text/plain.&#8221; I realized I&#8217;d have to switch to Django&#8217;s shiny new class-based generic views and remove the deprecated method. Note that &#8220;mimetype&#8221; has been changed to &#8220;content_type&#8221; also.</p>
 
-
-<h2>Morbi tincidunt</h2>
-
-<p>urna eget volutpat vestibulum, est nunc eleifend diam, quis interdum quam erat nec risus. Etiam tincidunt cursus tortor, in aliquam orci interdum euismod. Curabitur nibh enim, fermentum eget placerat id</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>urls.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Public: Makes a GET request to Mega API</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># shop   - The Shop instance</span>
-</span><span class='line'><span class="c1"># url    - The String which is the URL to query for</span>
-</span><span class='line'><span class="c1"># params - The Hash of attributes to pass in to the query</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># Examples</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#   MegaApps::Interface.get(shop, &#39;/foo&#39;, {bar: &#39;bar&#39;})</span>
-</span><span class='line'><span class="c1">#   # =&gt; {...}</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># Returns the Hash</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># Signature</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#   &lt;mtd&gt;(args)</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># mtd - Either of the get, post or put HTTP methods</span>
-</span><span class='line'><span class="sx">%w(get put post)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">mtd</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">define_method</span> <span class="n">mtd</span> <span class="k">do</span> <span class="o">|</span><span class="n">shop</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">pre_setup</span>
-</span><span class='line'>    <span class="no">Mega</span><span class="o">::</span><span class="no">Request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mtd</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">access_params</span><span class="p">(</span><span class="n">shop</span><span class="p">,</span> <span class="n">params</span><span class="p">))</span><span class="o">.</span><span class="n">to_hash</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">url</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">TemplateView</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^robots\.txt$&#39;</span><span class="p">,</span> <span class="n">TemplateView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s">&#39;robots.txt&#39;</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="s">&#39;text/plain&#39;</span><span class="p">)),</span>
+</span><span class='line'>    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^humans\.txt$&#39;</span><span class="p">,</span> <span class="n">TemplateView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s">&#39;humans.txt&#39;</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="s">&#39;text/plain&#39;</span><span class="p">)),</span>
+</span><span class='line'><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>, rutrum ut urna. Morbi in odio nibh, vitae viverra tortor. Etiam sed massa elit. Integer non massa in urna accumsan adipiscing vitae sit amet ante. Vivamus urna metus, sollicitudin eu interdum ut, laoreet mattis tortor. Sed sed tortor nunc. In hac habitasse platea dictumst. Suspendisse vel quam mi, nec tristique orci.</p>
+<p>Another problem I had was the invalid import of <code>from django.views.generic.simple import redirect_to</code> which has been deprecated in 1.5. To get around that I changed my view code to use <code>redirect</code> instead.</p>
 
-<figure class='code'><figcaption><span>interface.rb </span><a href='http://coo.com'>sometext</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>views.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">redirect</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">page_view</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># View code here</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/other-page/&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You could also use Django&#8217;s class-based generic views to put the redirect in a URL rule in your urls.py file.</p>
+
+<figure class='code'><figcaption><span>urls.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Public: Makes a GET request to Mega API</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># shop   - The Shop instance</span>
-</span><span class='line'><span class="c1"># url    - The String which is the URL to query for</span>
-</span><span class='line'><span class="c1"># params - The Hash of attributes to pass in to the query</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># Examples</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#   MegaApps::Interface.get(shop, &#39;/foo&#39;, {bar: &#39;bar&#39;})</span>
-</span><span class='line'><span class="c1">#   # =&gt; {...}</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># Returns the Hash</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># Signature</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#   &lt;mtd&gt;(args)</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1"># mtd - Either of the get, post or put HTTP methods</span>
-</span><span class='line'><span class="sx">%w(get put post)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">mtd</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">define_method</span> <span class="n">mtd</span> <span class="k">do</span> <span class="o">|</span><span class="n">shop</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">pre_setup</span>
-</span><span class='line'>    <span class="no">Mega</span><span class="o">::</span><span class="no">Request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">mtd</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">access_params</span><span class="p">(</span><span class="n">shop</span><span class="p">,</span> <span class="n">params</span><span class="p">))</span><span class="o">.</span><span class="n">to_hash</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">url</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">RedirectView</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">url</span><span class="p">(</span><span class="s">r&#39;^page-url&#39;</span><span class="p">,</span> <span class="n">RedirectView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">&#39;/other-page/&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Fusce aliquam</h2>
-
-<div><script src='https://gist.github.com/996818.js?file='></script>
-<noscript><pre><code>@@ -590,7 +590,7 @@ class SpritesTest &lt; Test::Unit::TestCase
-  it &quot;should generate a sprite from nested folders&quot; do
-    css = render &lt;&lt;-SCSS
--     @import &quot;nested/*.png&quot;;
-+     @import &quot;nested/**/*.png&quot;;
-      @include all-nested-sprites;
-    SCSS
-    assert_correct css, &lt;&lt;-CSS</code></pre></noscript></div>
-
-
-<p>congue dictum. Nam dignissim eros commodo eros rutrum cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere, est at dictum malesuada, urna lectus condimentum dui, sit amet aliquet risus velit sed dolor. Pellentesque laoreet nulla blandit lectus pulvinar laoreet. Maecenas lorem dolor, gravida ac vulputate eget, lacinia ut nunc. Sed consequat semper quam, quis sodales arcu congue a. Nullam ac urna elit. Ut vel elit diam, vel luctus nisi. Phasellus porta scelerisque nisi quis consequat. Integer a</p>
-
-<p><span class='pullquote-right' data-pullquote='Sed eget orci vel'>
-commodo dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed eget orci vel lectus vulputate ullamcorper quis quis orci. Morbi mollis sapien in tortor ullamcorper sit
-</span></p>
-
-<p> amet lacinia justo vulputate. Nam eget mauris elit, at lobortis tellus. Fusce ligula odio, mollis sit amet dignissim vitae, imperdiet et nisi.</p>
-
-<h2>Vestibulum facilisis</h2>
-
-<p>accumsan fringilla. Proin justo magna, cursus sit amet suscipit eu, euismod in mi. Ut malesuada nisi nec turpis pretium dictum sit amet nec nisi. Proin in urna sapien. Quisque lobortis auctor nibh non aliquet. Donec bibendum cursus dolor, in hendrerit neque lacinia a. Mauris arcu ipsum, interdum sit amet sagittis in, rutrum consequat lorem. Aenean dictum odio et lacus molestie quis placerat nunc laoreet. Ut consectetur porttitor lacinia. Mauris hendrerit dui id erat vestibulum ut consectetur felis hendrerit. Duis enim ligula, ultricies non cursus sit amet, sollicitudin vel mauris. Cras tellus nulla, mollis quis rhoncus vitae, consectetur eu erat. Maecenas et diam nec mauris lacinia egestas condimentum ac lectus. Donec consectetur, diam congue volutpat volutpat, sem enim mollis dolor, quis tempus metus ipsum nec lacus.</p>
-
-<h2>Duis consequat</h2>
-
-<p>pharetra nunc, quis fringilla orci semper ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nunc est, pulvinar sed imperdiet scelerisque, fermentum eu dolor. Quisque vel mi nunc. Curabitur congue consectetur lacinia. Curabitur id dui tortor, et pretium lorem. Nullam metus mi, venenatis at gravida ut, consequat in risus. Cras tristique gravida magna, eget rhoncus nisl blandit vitae. Sed id tellus enim. Quisque sed orci nisi. Nunc id felis ullamcorper metus cursus tristique et non quam.</p>
+<p>I hope these examples help someone out who had the same problems as me. I was still impressed with how seamless the upgrade to 1.5 was and I had fewer things to fix than I thought I would. Upgrade early and upgrade often!</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Lorem Ipsum]]></title>
-    <link href="http://peterschaadt.com/blog/2012/10/01/lorem-ipsum/"/>
-    <updated>2012-10-01T17:42:00-04:00</updated>
-    <id>http://peterschaadt.com/blog/2012/10/01/lorem-ipsum</id>
-    <content type="html"><![CDATA[<h2>Lorem ipsum dolor</h2>
+    <title type="html"><![CDATA[My Setup]]></title>
+    <link href="http://peterschaadt.com/blog/2012/03/26/my-setup/"/>
+    <updated>2012-03-26T16:43:00-07:00</updated>
+    <id>http://peterschaadt.com/blog/2012/03/26/my-setup</id>
+    <content type="html"><![CDATA[<h2>What do I use?</h2>
 
-<p>sit amet, consectetur adipiscing elit. Aenean tincidunt, orci id placerat semper, nibh elit cursus velit, quis porta quam tellus sed orci. In porttitor volutpat eros, et hendrerit nunc pulvinar a. Donec</p>
+<p>This post is inspired by <a href="http://usesthis.com">UsesThis</a>, a site that highlights individuals and their development setups. I have a lot of people that ask me what I use in my development workflow so I&#8217;d like to put it out there. I&#8217;ll try to update this as frequently as I can when things change.</p>
 
-<blockquote><p>malesuada pulvinar dui, vitae egestas nunc dignissim eu. Donec auctor velit ac erat</p></blockquote>
+<h2>Operating System: <a href="http://www.apple.com/osx/">OS X Mountain Lion 10.8.2</a></h2>
+
+<p>I was a long-time Windows fan but once I started doing serious development work Cygwin just wasn&#8217;t cutting it anymore. I had some problems with OS X Lion, notably with compiling MySQL and with support for full-screen apps, but the latest release of Mountain Lion seems to work much better for me.</p>
+
+<h2>Browser: <a href="https://www.google.com/intl/en/chrome/browser/beta.html">Google Chrome Beta</a></h2>
+
+<p>Google Chrome&#8217;s silent updates and syncing features (including tabs!) keep my browser up to date between my laptops and desktops. I&#8217;ve always loved Firefox but I stopped using it as my primary browser once Google Chrome expanded its collection of extensions. Firefox has fixed some of the memory bloat and I still use it frequently for debugging with Firebug, but I&#8217;ve become attached to the speed and usability of Google Chrome. The <a href="https://www.google.com/intl/en/chrome/browser/canary.html">Canary release</a> provides even more cutting-edge features and can be used alongside your standard Chrome install.</p>
+
+<h2>Text Editor: <a href="http://www.sublimetext.com/2">Sublime Text 2</a></h2>
+
+<p>When I used Windows I was a fan of Notepad++ and I looked for something similar when I switched to Mac OS X. I do not find the features of Textmate or BBEdit to be worth the cost and ever since I&#8217;ve discovered Sublime Text Editor I haven&#8217;t looked back. I haven&#8217;t checked it out yet but a <a href="http://www.sublimetext.com/blog/articles/sublime-text-3-beta">Sublime Text 3 Beta</a> was recently released.</p>
+
+<h2>IDE: <a href="http://www.jetbrains.com/pycharm/">Jetbrains PyCharm</a></h2>
+
+<p>PyCharm isn&#8217;t cheap but anyone who&#8217;s familiar with Jetbrains IntelliJ (for Java) knows that Jetbrains knows how to make productive, yet attractive, IDEs. PyCharm also offers great Django and Flask support. I&#8217;ve used Eclipse for university projects but it&#8217;s always been too cumbersome and slow for me.</p>
+
+<h2>Terminal: <a href="http://www.iterm2.com/#/section/home">iTerm2</a>, <a href="http://zsh.sourceforge.net/">ZSH</a>, and <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a></h2>
+
+<p>Coming from PowerShell and Cygwin, the default terminal app was a blessing. Then I found iTerm2 which offers split panes, search, autocomplete, instant replay (mostly just for fun), and custom profiles. Before long I had switched from Bash to ZSH (Z Shell) (just a <code>chsh -s /bin/zsh</code> away!) and oh-my-zsh. There is much better support for extended globbing, path expansion, command line history, and oh-my-zsh adds support for configuring your prompt and choosing a color theme to suit your preferences.</p>
+
+<h2>Mail: <a href="http://www.sparrowmailapp.com/">Sparrow</a></h2>
+
+<p>This excellent and intuitive mail application offers the best desktop Gmail support for Macs. I was dismayed to find out that the team had been hired by Google and that development would cease. That said, the app is still very usable.</p>
+
+<h2>Office Suite: <a href="http://www.libreoffice.org/">LibreOffice</a></h2>
+
+<p>While the Microsoft Office Suite reigns over almost every Windows install, their offering for Macs is an entirely different beast. I uninstalled OpenOffice after a few days of using it and settled on LibreOffice. Their productivity apps are fast and I prefer their traditional look.</p>
+
+<h2>Mockups: <a href="http://www.balsamiq.com/">Balsamiq</a></h2>
+
+<p>For those quick, interactive, but not high-fidelity mockups, I haven&#8217;t found a better tool than Balsamiq. In addition to producing great software, I&#8217;ve reached out to the Balsamiq Team before about support issues and received prompt feedback with a solution. Their Mockups To Go page offers downloads for additional UI elements like Twitter&#8217;s <a href="https://mockupstogo.mybalsamiq.com/projects/web/Bootstrap">Bootstrap</a> and Apple&#8217;s <a href="https://mockupstogo.mybalsamiq.com/projects/ios/iPad+Controls">iPad</a> which have been very helpful.</p>
+
+<h2>VM: <a href="https://www.virtualbox.org/">VirtualBox</a></h2>
+
+<p>Sadly, when I enabled Full Disk Encryption on my MacBook Air I was no longer able to dual-boot with Linux. Since then I&#8217;ve run my Ubuntu OS (usually 12.04) using VirtualBox. It&#8217;s a really useful program and it doesn&#8217;t seem to slow down my computer as much as other virtual machine tools.</p>
+
+<h2>Media: <a href="http://videolan.org">VLC</a>, <a href="http://xbmc.org/">XBMC</a> 12.0 RC2 Frodo</h2>
+
+<p>For those odd file types, VLC handles everything with ease. I&#8217;ve even had a lot of luck with it playing corrupted files. I prefer to not have iTunes managing my media library so I just open my Music directory with VLC and it works great.
+For managing movies and TV shows, you just can&#8217;t beat XBMC. It fetches background art, HD trailers, and IMDB ratings for every movie in your collection. This is all with the default configuration. There&#8217;s also an amazing remote control app for your Android device called <a href="https://play.google.com/store/apps/details?id=org.leetzone.android.yatsewidgetfree&amp;hl=en">Yatse</a>.</p>
+
+<p>Last updated: 2/7/2013.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Redis on Mac OS X Lion]]></title>
+    <link href="http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion/"/>
+    <updated>2012-02-28T00:00:00-08:00</updated>
+    <id>http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion</id>
+    <content type="html"><![CDATA[<p>This post will give you a quick overview of installing the latest stable version of <a href="http://redis.io">Redis</a> on Mac OS X Lion 10.7.3.</p>
+
+<p>Fire up the Terminal app on your Mac and fetch the Redis package.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.8.tar.gz</span></code></pre></td></tr></table></div></figure>
 
 
-<p> porta commodo. Curabitur consequat nulla eget ipsum malesuada id tempor urna porttitor. Phasellus eu mauris odio. Vivamus eget lectus nec massa tempus pulvinar at ac libero. Aliquam sodales enim sit amet risus posuere sed porttitor felis venenatis. Pellentesque malesuada gravida ligula luctus lacinia.</p>
+<p>If you don&#8217;t have wget, you can install it with <a href="http://mxcl.github.com/homebrew/">Homebrew</a>.</p>
 
-<h2>Donec auctor</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install wget</span></code></pre></td></tr></table></div></figure>
 
-<p>nisl vel fringilla varius, lectus dui faucibus est, sed fermentum neque nisl eu lectus. Vestibulum id arcu dui, nec tristique mauris. Duis gravida augue a arcu sagittis id aliquet velit dignissim. Nulla</p>
 
-<h3>interdum</h3>
+<p>Now extract the Redis archive, navigate to the folder, and run <code>make</code>.</p>
 
-<p><img src="http://placekitten.com/890/280"></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar xzf redis-2.4.8.tar.gz
+</span><span class='line'>cd redis-2.4.8
+</span><span class='line'>sudo make</span></code></pre></td></tr></table></div></figure>
 
-<p>lacinia dui, vel auctor leo vulputate eget. Donec at urna quam. Praesent ac ante mauris, non tempus urna. Donec vitae ligula iaculis dui aliquet imperdiet ut a sem. Nulla eu nulla felis. Integer fermentum laoreet fringilla. Nunc vel sem rhoncus arcu consectetur scelerisque. Sed elementum tempor est in vehicula.</p>
 
-<h3>Vivamus</h3>
+<p>It&#8217;s a good idea to run the included tests to make sure everything went smoothly (<strong>warning</strong>: this caused a lot of System prompts about allowing Redis connections).</p>
 
-<p>ac massa nunc, at facilisis nunc. Vestibulum rhoncus velit in dui tincidunt ac sollicitudin nisi auctor. Aenean sapien leo, vestibulum non sollicitudin vitae, dignissim nec lacus. Pellentesque dapibus lectus bibendum turpis malesuada sodales. Praesent a leo quam, in pellentesque est.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make test</span></code></pre></td></tr></table></div></figure>
 
-<h2>Praesent tristique</h2>
 
-<p>molestie felis, at interdum orci rutrum vel. Sed et leo vel nunc dictum lacinia ullamcorper a velit. Vestibulum purus est, ornare sit amet eleifend eget, mollis non leo. Fusce mollis, dui at consequat hendrerit, lectus sapien pharetra quam, sit amet pharetra diam elit vitae augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam pulvinar laoreet leo, vel rutrum nibh convallis sed. Curabitur laoreet posuere dui quis blandit. Curabitur sed lacus neque, vel fringilla est. Vestibulum sit amet ligula eget sapien ultricies scelerisque. Donec dictum porta auctor. Donec placerat rutrum condimentum. Aliquam fermentum semper pulvinar. Proin nisi est, ultrices vitae suscipit quis, ultrices vel justo.</p>
+<p>Fire up the server on localhost.</p>
 
-<h2>Curabitur sem</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>redis-server</span></code></pre></td></tr></table></div></figure>
 
-<p>ligula, vestibulum eget ultricies vitae, aliquam eu turpis. Mauris eleifend lacinia mi, a elementum turpis consectetur vel. Ut commodo metus et felis tempor vitae pharetra turpis euismod. Duis purus nunc, molestie ornare suscipit in, porta id neque. Cras pellentesque faucibus malesuada. Fusce porttitor, metus at vestibulum varius, nulla nisi lacinia nisi, at fermentum arcu risus nec ante. Aenean consequat volutpat leo nec tempus. Integer elementum felis a tortor congue facilisis. Donec dictum vulputate pulvinar. Pellentesque porttitor bibendum rutrum. Donec sed gravida justo. Duis imperdiet quam eu libero adipiscing non facilisis est tempus. Proin nec tellus libero. Aliquam tincidunt, ligula id auctor semper, lorem metus rutrum elit, eget iaculis turpis justo at velit. Sed faucibus, urna id consectetur consequat, nisl erat pretium diam, eget molestie lacus erat ac arcu.</p>
 
-<h2>Suspendisse potenti</h2>
+<p>To use the Redis console, <code>redis-server</code> must already be running (in a separate tab/window).</p>
 
-<p>Nunc turpis augue, blandit quis euismod ac, eleifend eget enim. Nulla rutrum tellus id magna lobortis fermentum. Aliquam pretium vulputate erat, in mattis justo gravida vel. Aliquam erat volutpat. Nunc sem orci, adipiscing ultrices sagittis at, fringilla nec ipsum. Integer ultrices volutpat convallis. Quisque vehicula auctor posuere. Vivamus non diam ut nisi posuere rhoncus. Suspendisse non tellus tortor. Vivamus id tellus sed mauris pulvinar rhoncus.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>redis-cli</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Silicon Valley Code Camp]]></title>
+    <link href="http://peterschaadt.com/blog/2011/10/20/silicon-valley-code-camp/"/>
+    <updated>2011-10-20T00:00:00-07:00</updated>
+    <id>http://peterschaadt.com/blog/2011/10/20/silicon-valley-code-camp</id>
+    <content type="html"><![CDATA[<p>This October I was fortunate enough to be able to attend <a href="http://www.siliconvalley-codecamp.com/">Silicon Valley Code Camp</a> at Foothill Community College in sunny Los Altos, California. A two-day event, SVCC consisted of a diverse collection of tech talks and demos. A stronge presence of corporate sponsors such as Google, Box, Adobe, Microsoft, Bitbucket, Twilio, and 10gen ensured an ample supply of coffee, muffins, and catered sandwiches for the 2,247 in attendance. This was the first tech conference I have attended, and while I am the spritely age of 21, I noticed I was one of the youngest people on site.</p>
+
+<h2>Day 1, Saturday</h2>
+
+<p>The morning kicked off with a personal highlight, hearing Douglas Crawford, author of one of my favorite technical books, <em>Javascript: The Good Parts</em>, give his &#8220;ECMAScript 5: The New Parts&#8221; talk. His presentation sparked a fantastic discussion on the future direction of Javascript and its role in web development as well as its surge in popularity among mobile frameworks.</p>
+
+<p>For my next talk I headed over to an &#8220;Introduction to MongoDB,&#8221; given by Manish Pandit, Director of Engineering at IGN. It&#8217;s rare that binary JSON, server replication, and humor are combined in a presentation but a great job was done entertaining the crowded auditorium while we learned the basics of MongoDB. We viewed ad-hoc queries being made on production servers (I hope he didn&#8217;t get in trouble!) and got a great look at being productive with the mongo shell.</p>
+
+<p>After sandwiches provided courtesy of Google, I went to an Android Tablet application programming session which showed off the capabilities of the Android 3.x SDK. We used working code snippets to demonstrate some of the new features and picked through a couple sample applications.</p>
+
+<h2>Day 2, Sunday</h2>
+
+<p>With the passing of Steve Jobs less than a week earlier, many of us gathered in a packed room Sunday to mourn the loss of one of the world&#8217;s greatest leaders and innovators. Many attendees shared personal anecdotes of their encounters with Steve that lent unique insight into his world.</p>
+
+<p>I followed this with an in-depth session exploring the world that is Vim. Many people in the crowd were split by the question of their favorite code editor and soon a strong, but informed, debate ensued between the entrenched users of Vim and Emacs. This session was just as much about development practices as much as it was about programming culture and I got to pick up many great insights on achieving maximum workflow productivity.</p>
+
+<p>I finished the afternoon with a session on current and upcoming trends in web analytics. This fascinating presentation discussed the rise in event-based tracking as well as the emerging desire for mobile application analytics. Considering <a href="https://www.leftronic.com">Leftronic</a>, the startup I started working for in September, offers a lot of dashboard widgets utilizing APIs for web analytics, I felt like I walked away from this session with a newfound understanding of web analytics and their importance in generating actionable business intelligence data.</p>
+
+<p>In addition to the many interesting topics I was exposed to at the tech talks, I got to demo the latest Windows Phone Mango update, watch an autonomous robot navigate with just Microsoft Kinect sensors, and see fork bombs test the autoscaling capabilities of some cloud-hosted applications.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Belated Blog Begins]]></title>
+    <link href="http://peterschaadt.com/blog/2011/09/18/belated-blog-begins/"/>
+    <updated>2011-09-18T19:06:00-07:00</updated>
+    <id>http://peterschaadt.com/blog/2011/09/18/belated-blog-begins</id>
+    <content type="html"><![CDATA[<blockquote><p>Well it&#8217;s about damn time.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Me</p></blockquote>
+
+<p>Before Web 3.0 takes the Silicon Valley by storm I&#8217;d like to fulfill my Web 2.0 obligation of maintaining a personal blog. This blog will serve as a collection of ideas, observations, thought-provoking monologues (or is it monoblogs?), and a number of technical posts. The content may get dry at times but be confident that when I do make jokes, they&#8217;ll be sharp and brimming with sarcastic wit.</p>
+
+<p>This blog was built using Octopress, a Jekyll framework, and will be hosted on Heroku. I&#8217;ve found it an annoyance to maintain Wordpress and a database and I&#8217;ve decided the portable solution that Jekyll provides is best for my purposes. Additionally, you can view this blog&#8217;s source code repository on <a href="https://github.com/peterfschaadt/my-blog">Github</a>.</p>
+
+<p>Be sure to check back frequently for updates (subscription feature hopefully coming soon). Feel free to <a href="mailto:peter.schaadt@gmail.com">contact me</a> if you have any questions or suggestions!</p>
 ]]></content>
   </entry>
   

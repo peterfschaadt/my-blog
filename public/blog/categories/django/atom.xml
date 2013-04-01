@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Django | Peter Schaadt]]></title>
+  <link href="http://peterschaadt.com/blog/categories/django/atom.xml" rel="self"/>
+  <link href="http://peterschaadt.com/"/>
+  <updated>2013-03-31T23:40:02-07:00</updated>
+  <id>http://peterschaadt.com/</id>
+  <author>
+    <name><![CDATA[Peter Schaadt]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Upgrading to Django 1.5]]></title>
+    <link href="http://peterschaadt.com/blog/2013/03/04/upgrading-to-django-1.5/"/>
+    <updated>2013-03-04T00:00:00-08:00</updated>
+    <id>http://peterschaadt.com/blog/2013/03/04/upgrading-to-django-1.5</id>
+    <content type="html"><![CDATA[<p>Recently I upgraded a Django site from 1.4.5 to the new <a href="https://docs.djangoproject.com/en/dev/releases/1.5/">1.5</a> release. I decided to upgrade before my Django app got more complex and I wanted to check out the new <a href="https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user">configurable user model</a>. I'll cover some problems I had when upgrading and show replacements for some deprecated methods.</p>
+
+<p>I did a quick <code>pip install django==1.5</code> and hoped for the best. Unfortunately my heart sank when I ran <code>python manage.py runserver</code> after upgrading and was greeted with an error message (DEBUG set to true in settings) about some import statements. Nothing in software comes easy.</p>
+
+<p>Like a lot of sites on the web, my Django app has a <a href="http://www.robotstxt.org/">robots.txt</a> and a <a href="http://humanstxt.org">humans.txt</a> file. With Django 1.4.5 I had been serving these text files with the <code>direct_to_template</code> method, with a mimetype of "text/plain." I realized I'd have to switch to Django's shiny new class-based generic views and remove the deprecated method. Note that "mimetype" has been changed to "content_type" also.</p>
+
+<p>``` python urls.py
+from django.conf.urls import patterns, url
+from django.views.generic import TemplateView</p>
+
+<p>urlpatterns = patterns('',</p>
+
+<pre><code>url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+url(r'^humans\.txt$', TemplateView.as_view(template_name='humans.txt', content_type='text/plain')),
+</code></pre>
+
+<p>)
+```</p>
+
+<p>Another problem I had was the invalid import of <code>from django.views.generic.simple import redirect_to</code> which has been deprecated in 1.5. To get around that I changed my view code to use <code>redirect</code> instead.</p>
+
+<p>``` python views.py
+from django.shortcuts import redirect</p>
+
+<p>def page_view(request):</p>
+
+<pre><code># View code here
+return redirect('/other-page/')
+</code></pre>
+
+<p>```</p>
+
+<p>You could also use Django's class-based generic views to put the redirect in a URL rule in your urls.py file.</p>
+
+<p>``` python urls.py
+from django.conf.urls import patterns, url
+from django.views.generic import RedirectView</p>
+
+<p>urlpatterns = patterns('',</p>
+
+<pre><code>url(r'^page-url', RedirectView.as_view(url='/other-page/'))
+</code></pre>
+
+<p>)
+```</p>
+
+<p>I hope these examples help someone out who had the same problems as me. I was still impressed with how seamless the upgrade to 1.5 was and I had fewer things to fix than I thought I would. Upgrade early and upgrade often!</p>
+]]></content>
+  </entry>
+  
+</feed>

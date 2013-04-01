@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac OS X | Peter Schaadt]]></title>
+  <link href="http://peterschaadt.com/blog/categories/mac-os-x/atom.xml" rel="self"/>
+  <link href="http://peterschaadt.com/"/>
+  <updated>2013-03-31T23:40:02-07:00</updated>
+  <id>http://peterschaadt.com/</id>
+  <author>
+    <name><![CDATA[Peter Schaadt]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Redis on Mac OS X Lion]]></title>
+    <link href="http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion/"/>
+    <updated>2012-02-28T00:00:00-08:00</updated>
+    <id>http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion</id>
+    <content type="html"><![CDATA[<p>This post will give you a quick overview of installing the latest stable version of <a href="http://redis.io">Redis</a> on Mac OS X Lion 10.7.3.</p>
+
+<p>Fire up the Terminal app on your Mac and fetch the Redis package.</p>
+
+<p><code>
+wget http://redis.googlecode.com/files/redis-2.4.8.tar.gz
+</code></p>
+
+<p>If you don't have wget, you can install it with <a href="http://mxcl.github.com/homebrew/">Homebrew</a>.</p>
+
+<p><code>
+brew install wget
+</code></p>
+
+<p>Now extract the Redis archive, navigate to the folder, and run <code>make</code>.</p>
+
+<p><code>
+tar xzf redis-2.4.8.tar.gz
+cd redis-2.4.8
+sudo make
+</code></p>
+
+<p>It's a good idea to run the included tests to make sure everything went smoothly (<strong>warning</strong>: this caused a lot of System prompts about allowing Redis connections).</p>
+
+<p><code>
+make test
+</code></p>
+
+<p>Fire up the server on localhost.</p>
+
+<p><code>
+redis-server
+</code></p>
+
+<p>To use the Redis console, <code>redis-server</code> must already be running (in a separate tab/window).</p>
+
+<p><code>
+redis-cli
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
