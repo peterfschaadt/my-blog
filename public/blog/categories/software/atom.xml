@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software | Peter Schaadt]]></title>
   <link href="http://peterschaadt.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://peterschaadt.com/"/>
-  <updated>2013-04-01T00:08:46-07:00</updated>
+  <updated>2013-04-01T01:36:30-07:00</updated>
   <id>http://peterschaadt.com/</id>
   <author>
     <name><![CDATA[Peter Schaadt]]></name>
@@ -30,8 +30,10 @@ from django.views.generic import TemplateView</p>
 
 <p>urlpatterns = patterns('',</p>
 
-<pre><code>url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
-url(r'^humans\.txt$', TemplateView.as_view(template_name='humans.txt', content_type='text/plain')),
+<pre><code>url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', 
+    content_type='text/plain')),
+url(r'^humans\.txt$', TemplateView.as_view(template_name='humans.txt', 
+    content_type='text/plain')),
 </code></pre>
 
 <p>)
