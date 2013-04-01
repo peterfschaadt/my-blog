@@ -1,7 +1,6 @@
 .DS_Store
 *.scssc
 .bundle
-.DS_Store
 .sass-cache
 .gist-cache
 .pygments-cache
