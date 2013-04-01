@@ -4,7 +4,7 @@
   <title><![CDATA[Peter Schaadt]]></title>
   <link href="http://peterschaadt.com/atom.xml" rel="self"/>
   <link href="http://peterschaadt.com/"/>
-  <updated>2013-03-31T23:51:00-07:00</updated>
+  <updated>2013-04-01T00:08:46-07:00</updated>
   <id>http://peterschaadt.com/</id>
   <author>
     <name><![CDATA[Peter Schaadt]]></name>
@@ -219,7 +219,7 @@ For managing movies and TV shows, you just can&#8217;t beat XBMC. It fetches bac
 
 <p>This blog was built using Octopress, a Jekyll framework, and will be hosted on Heroku. I&#8217;ve found it an annoyance to maintain Wordpress and a database and I&#8217;ve decided the portable solution that Jekyll provides is best for my purposes. Additionally, you can view this blog&#8217;s source code repository on <a href="https://github.com/peterfschaadt/my-blog">Github</a>.</p>
 
-<p>Be sure to check back frequently for updates (subscription feature hopefully coming soon). Feel free to <a href="mailto:peter.schaadt@gmail.com">contact me</a> if you have any questions or suggestions!</p>
+<p>Be sure to check back frequently for updates (subscription feature hopefully coming soon). Feel free to <a href="http://peterschaadt.com/contact">contact me</a> if you have any questions or suggestions!</p>
 ]]></content>
   </entry>
   
