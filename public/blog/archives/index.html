@@ -178,6 +178,10 @@ Mar 26 2012 posted in Development, Setup, &hellip;">
 <aside class="sidebar">
   
     <section>
+  <h1>About Me</h1>
+  <p>I'm a student at the University of Virginia studying Computer Science. Sunnyvale, California will always be home.&nbsp;&nbsp;<a href="/about">more</a></p>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -204,6 +208,45 @@ Mar 26 2012 posted in Development, Setup, &hellip;">
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/peterfschaadt">@peterfschaadt</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'peterfschaadt',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Holler at Me</h1>
+  <p>
+    <a href="https://github.com/peterfschaadt"><img src="/images/icons/github.png" /></a>
+    <a href="https://twitter.com/peterschaadt"><img src="/images/icons/twitter.png" /></a>
+    <a href="https://www.linkedin.com/profile/view?id=93642736"><img src="/images/icons/linkedin.png" /></a>
+    <a href="https://plus.google.com/106197844179274757910"><img src="/images/icons/googleplus.png" /></a>
+    <a href="/contact"><img src="/images/icons/gmail.png" /></a>
+  </p>
+</section>
   
 </aside>
 
