@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Redis | Peter Schaadt]]></title>
   <link href="http://peterschaadt.com/blog/categories/redis/atom.xml" rel="self"/>
   <link href="http://peterschaadt.com/"/>
-  <updated>2013-04-03T23:05:10-07:00</updated>
+  <updated>2013-04-03T23:27:00-07:00</updated>
   <id>http://peterschaadt.com/</id>
   <author>
     <name><![CDATA[Peter Schaadt]]></name>
@@ -18,9 +18,9 @@
     <link href="http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion/"/>
     <updated>2012-02-28T00:00:00-08:00</updated>
     <id>http://peterschaadt.com/blog/2012/02/28/installing-redis-on-mac-os-x-lion</id>
-    <content type="html"><![CDATA[<p>This post will give you a quick overview of installing the latest stable version of <a href="http://redis.io">Redis</a> on Mac OS X Lion 10.7.3.</p>
+    <content type="html"><![CDATA[<p><a href="http://redis.io">Redis</a> is a very popular open-source key-value store that provides a great solution for services that don't need 100% data durability. Redis is an extremely fast database because it is almost always used to hold the entire dataset in memory. This post will give you a quick overview of installing the latest stable version of Redis on Mac OS X Lion 10.7.3.</p>
 
-<p>Fire up the Terminal app on your Mac and fetch the Redis package.</p>
+<p>Fire up the Terminal app (I recommend <a href="http://www.iterm2.com/">iTerm2</a>) on your Mac and fetch the Redis package.</p>
 
 <p><code>
 wget http://redis.googlecode.com/files/redis-2.4.8.tar.gz
@@ -40,7 +40,7 @@ cd redis-2.4.8
 sudo make
 </code></p>
 
-<p>It's a good idea to run the included tests to make sure everything went smoothly (<strong>warning</strong>: this caused a lot of System prompts about allowing Redis connections).</p>
+<p>It's a good idea to run the included tests to make sure everything went smoothly (<strong>warning</strong>: this caused a lot of System Prompts about allowing Redis connections on my computer).</p>
 
 <p><code>
 make test
@@ -57,6 +57,8 @@ redis-server
 <p><code>
 redis-cli
 </code></p>
+
+<p>Give Redis a shot, bindings exist for all major languages. If you're new to Redis, start with the <a href="http://try.redis.io">interactive tutorial</a> to learn the basic commands and how to interact with the database.</p>
 ]]></content>
   </entry>
   

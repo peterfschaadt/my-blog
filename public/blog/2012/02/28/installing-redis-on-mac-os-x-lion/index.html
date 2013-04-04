@@ -9,7 +9,7 @@
   <meta name="author" content="Peter Schaadt">
 
   
-  <meta name="description" content="This post will give you a quick overview of installing the latest stable version of Redis on Mac OS X Lion 10.7.3. Fire up the Terminal app on your &hellip;">
+  <meta name="description" content="Redis is a very popular open-source key-value store that provides a great solution for services that don&#8217;t need 100% data durability. Redis is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,9 +109,9 @@
   </header>
 
 
-<div class="entry-content"><p>This post will give you a quick overview of installing the latest stable version of <a href="http://redis.io">Redis</a> on Mac OS X Lion 10.7.3.</p>
+<div class="entry-content"><p><a href="http://redis.io">Redis</a> is a very popular open-source key-value store that provides a great solution for services that don&#8217;t need 100% data durability. Redis is an extremely fast database because it is almost always used to hold the entire dataset in memory. This post will give you a quick overview of installing the latest stable version of Redis on Mac OS X Lion 10.7.3.</p>
 
-<p>Fire up the Terminal app on your Mac and fetch the Redis package.</p>
+<p>Fire up the Terminal app (I recommend <a href="http://www.iterm2.com/">iTerm2</a>) on your Mac and fetch the Redis package.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.8.tar.gz</span></code></pre></td></tr></table></div></figure>
@@ -133,7 +133,7 @@
 </span><span class='line'>sudo make</span></code></pre></td></tr></table></div></figure>
 
 
-<p>It&#8217;s a good idea to run the included tests to make sure everything went smoothly (<strong>warning</strong>: this caused a lot of System prompts about allowing Redis connections).</p>
+<p>It&#8217;s a good idea to run the included tests to make sure everything went smoothly (<strong>warning</strong>: this caused a lot of System Prompts about allowing Redis connections on my computer).</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>make test</span></code></pre></td></tr></table></div></figure>
@@ -150,6 +150,8 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>redis-cli</span></code></pre></td></tr></table></div></figure>
 
+
+<p>Give Redis a shot, bindings exist for all major languages. If you&#8217;re new to Redis, start with the <a href="http://try.redis.io">interactive tutorial</a> to learn the basic commands and how to interact with the database.</p>
 </div>
 
 
